@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nettoyage de Données</title>
+</head>
+<body>
+    <h1>Uploader vos fichiers</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Nettoyer</button>
+    </form>
+    {% if merge_file %}
+    <h2>Fichiers disponibles</h2>
+    <a href="{% url 'dashboard' %}">Voir tableau de bord</a><br>
+    <a download="fusion.csv" href="data:text/csv;charset=utf-8,{{ merge_file|urlencode }}">Télécharger fusion</a><br>
+    <a download="nettoye.csv" href="data:text/csv;charset=utf-8,{{ clean_file|urlencode }}">Télécharger nettoyage</a>
+    {% endif %}
+</body>
+</html>
